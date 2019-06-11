@@ -1,0 +1,34 @@
+{
+    "type": "object",
+    "properties": {
+        "serviceGroupId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "An Otoroshi service group is just a group of service descriptor. It is useful to be able to define Api Keys for the whole group",
+            "properties": {
+                "description": {
+                    "description": "The descriptoin of the group",
+                    "example": "a string value",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "The unique id of the group. Usually 64 random alpha numerical characters, but can be anything",
+                    "example": "a string value",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the group",
+                    "example": "a string value",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "type": "object"
+        }
+    }
+}

@@ -1,0 +1,335 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "description": "The global config object of Otoroshi, used to customize settings of the current Otoroshi instance",
+            "properties": {
+                "alertsEmails": {
+                    "description": "Email addresses that will receive all Otoroshi alert events",
+                    "items": {
+                        "example": "admin@otoroshi.io",
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "alertsWebhooks": {
+                    "description": "Webhook that will receive all Otoroshi alert events",
+                    "items": {
+                        "description": "A callback URL where events are posted",
+                        "properties": {
+                            "headers": {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "description": "Headers to authorize the call or whatever",
+                                "example": {
+                                    "key": "value"
+                                },
+                                "type": "object"
+                            },
+                            "url": {
+                                "description": "The URL where events are posted",
+                                "example": "http://www.google.com",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "headers"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "analyticsEventsUrl": {
+                    "description": "The URL to get analytics events from",
+                    "example": "http://www.google.com",
+                    "format": "uri",
+                    "type": "string"
+                },
+                "analyticsWebhooks": {
+                    "description": "Webhook that will receive all internal Otoroshi events",
+                    "items": {
+                        "description": "A callback URL where events are posted",
+                        "properties": {
+                            "headers": {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "description": "Headers to authorize the call or whatever",
+                                "example": {
+                                    "key": "value"
+                                },
+                                "type": "object"
+                            },
+                            "url": {
+                                "description": "The URL where events are posted",
+                                "example": "http://www.google.com",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "url",
+                            "headers"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "apiReadOnly": {
+                    "description": "If enabled, Admin API won't be able to write/update/delete entities",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "autoLinkToDefaultGroup": {
+                    "description": "If not defined, every new service descriptor will be added to the default group",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "backofficeAuth0Config": {
+                    "description": "Optional configuration for the backoffice Auth0 domain",
+                    "properties": {
+                        "callbackUrl": {
+                            "description": "Auth0 callback URL",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "clientId": {
+                            "description": "Auth0 client id",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "clientSecret": {
+                            "description": "Auth0 client secret",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "domain": {
+                            "description": "Auth0 domain",
+                            "example": "a string value",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "clientId",
+                        "clientSecret",
+                        "domain",
+                        "callbackUrl"
+                    ],
+                    "type": "object"
+                },
+                "cleverSettings": {
+                    "description": "Optional CleverCloud configuration",
+                    "properties": {
+                        "consumerKey": {
+                            "description": "CleverCloud consumer key",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "consumerSecret": {
+                            "description": "CleverCloud consumer token",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "orgaId": {
+                            "description": "CleverCloud organization id",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "secret": {
+                            "description": "CleverCloud oauth secret",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "token": {
+                            "description": "CleverCloud oauth token",
+                            "example": "a string value",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "consumerKey",
+                        "consumerSecret",
+                        "token",
+                        "secret",
+                        "orgaId"
+                    ],
+                    "type": "object"
+                },
+                "endlessIpAddresses": {
+                    "description": "IP addresses for which any request to Otoroshi will respond with 128 Gb of zeros",
+                    "items": {
+                        "example": "192.192.192.192",
+                        "format": "ipv4",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "ipFiltering": {
+                    "description": "The filtering configuration block for a service of globally.",
+                    "properties": {
+                        "blacklist": {
+                            "description": "Blacklisted IP addresses",
+                            "items": {
+                                "example": "192.192.192.192",
+                                "format": "ipv4",
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "whitelist": {
+                            "description": "Whitelisted IP addresses",
+                            "items": {
+                                "example": "192.192.192.192",
+                                "format": "ipv4",
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "whitelist",
+                        "blacklist"
+                    ],
+                    "type": "object"
+                },
+                "limitConcurrentRequests": {
+                    "description": "If enabled, Otoroshi will reject new request if too much at the same time",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "lines": {
+                    "description": "Possibles lines for Otoroshi",
+                    "items": {
+                        "example": "a string value",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "mailGunSettings": {
+                    "description": "Optional mailgun configuration",
+                    "properties": {
+                        "apiKey": {
+                            "description": "Mailgun Api Key",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "domain": {
+                            "description": "Mailgun domain",
+                            "example": "a string value",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "apiKey",
+                        "domain"
+                    ],
+                    "type": "object"
+                },
+                "maxConcurrentRequests": {
+                    "description": "The number of authorized request processed at the same time",
+                    "example": 123,
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "maxHttp10ResponseSize": {
+                    "description": "The max size in bytes of an HTTP 1.0 response",
+                    "example": 123,
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "maxLogsSize": {
+                    "description": "Number of events kept locally",
+                    "example": 123123,
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "middleFingers": {
+                    "description": "Use middle finger emoji as a response character for endless HTTP responses",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "perIpThrottlingQuota": {
+                    "description": "Authorized number of calls per second globally per IP address, measured on 10 seconds",
+                    "example": 123,
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "privateAppsAuth0Config": {
+                    "description": "Optional configuration for the private apps Auth0 domain",
+                    "properties": {
+                        "callbackUrl": {
+                            "description": "Auth0 callback URL",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "clientId": {
+                            "description": "Auth0 client id",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "clientSecret": {
+                            "description": "Auth0 client secret",
+                            "example": "a string value",
+                            "type": "string"
+                        },
+                        "domain": {
+                            "description": "Auth0 domain",
+                            "example": "a string value",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "clientId",
+                        "clientSecret",
+                        "domain",
+                        "callbackUrl"
+                    ],
+                    "type": "object"
+                },
+                "streamEntityOnly": {
+                    "description": "HTTP will be streamed only. Doesn't work with old browsers",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "throttlingQuota": {
+                    "description": "Authorized number of calls per second globally, measured on 10 seconds",
+                    "example": 123,
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "u2fLoginOnly": {
+                    "description": "If enabled, login to backoffice through Auth0 will be disabled",
+                    "example": true,
+                    "type": "boolean"
+                },
+                "useCircuitBreakers": {
+                    "description": "If enabled, services will be authorized to use circuit breakers",
+                    "example": true,
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "streamEntityOnly",
+                "autoLinkToDefaultGroup",
+                "limitConcurrentRequests",
+                "maxConcurrentRequests",
+                "useCircuitBreakers",
+                "apiReadOnly",
+                "u2fLoginOnly",
+                "ipFiltering",
+                "throttlingQuota",
+                "perIpThrottlingQuota",
+                "analyticsEventsUrl",
+                "analyticsWebhooks",
+                "alertsWebhooks",
+                "alertsEmails",
+                "endlessIpAddresses"
+            ],
+            "type": "object"
+        }
+    }
+}

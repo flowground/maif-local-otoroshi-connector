@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "serviceGroupId": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

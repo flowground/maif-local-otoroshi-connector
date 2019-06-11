@@ -1,0 +1,943 @@
+{
+    "title": "Otoroshi Admin",
+    "description": "Admin API of the Otoroshi reverse proxy",
+    "docsUrl": "https://maif.github.io/otoroshi/",
+    "url": "https://api.apis.guru/v2/specs/maif.local/otoroshi/1.1.2/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "http://maif.local/api",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "auth_username": {
+                "label": "Username (otoroshi_auth)",
+                "viewClass": "TextFieldView"
+            },
+            "auth_password": {
+                "label": "Password (otoroshi_auth)",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "allApiKeys": {
+            "main": "./lib/actions/allApiKeys.js",
+            "title": "Get all api keys",
+            "description": "Get all api keys",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/allApiKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "globalConfig": {
+            "main": "./lib/actions/globalConfig.js",
+            "title": "Get the full configuration of Otoroshi",
+            "description": "Get the full configuration of Otoroshi",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/globalConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "patchGlobalConfig": {
+            "main": "./lib/actions/patchGlobalConfig.js",
+            "title": "Update the global configuration with a diff",
+            "description": "Update the global configuration with a diff",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/patchGlobalConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "putGlobalConfig": {
+            "main": "./lib/actions/putGlobalConfig.js",
+            "title": "Update the global configuration",
+            "description": "Update the global configuration",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/putGlobalConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "allServiceGroups": {
+            "main": "./lib/actions/allServiceGroups.js",
+            "title": "Get all service groups",
+            "description": "Get all service groups",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/allServiceGroups.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createGroup": {
+            "main": "./lib/actions/createGroup.js",
+            "title": "Create a new service group",
+            "description": "Create a new service group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "apiKeysFromGroup": {
+            "main": "./lib/actions/apiKeysFromGroup.js",
+            "title": "Get all api keys for the group of a service",
+            "description": "Get all api keys for the group of a service",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/apiKeysFromGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createApiKeyFromGroup": {
+            "main": "./lib/actions/createApiKeyFromGroup.js",
+            "title": "Create a new api key for a group",
+            "description": "Create a new api key for a group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createApiKeyFromGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteApiKeyFromGroup": {
+            "main": "./lib/actions/deleteApiKeyFromGroup.js",
+            "title": "Delete an api key",
+            "description": "Delete an api key for a specified service group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteApiKeyFromGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "apiKeyFromGroup": {
+            "main": "./lib/actions/apiKeyFromGroup.js",
+            "title": "Get an api key",
+            "description": "Get an api key for a specified service group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/apiKeyFromGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "patchApiKeyFromGroup": {
+            "main": "./lib/actions/patchApiKeyFromGroup.js",
+            "title": "Update an api key with a diff",
+            "description": "Update an api key for a specified service descriptor with a diff",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/patchApiKeyFromGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateApiKeyFromGroup": {
+            "main": "./lib/actions/updateApiKeyFromGroup.js",
+            "title": "Update an api key",
+            "description": "Update an api key for a specified service group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateApiKeyFromGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "resetApiKeyFromGroupQuotas": {
+            "main": "./lib/actions/resetApiKeyFromGroupQuotas.js",
+            "title": "Reset the quota state of an api key",
+            "description": "Reset the quota state of an api key",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/resetApiKeyFromGroupQuotas.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "apiKeyFromGroupQuotas": {
+            "main": "./lib/actions/apiKeyFromGroupQuotas.js",
+            "title": "Get the quota state of an api key",
+            "description": "Get the quota state of an api key",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/apiKeyFromGroupQuotas.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteGroup": {
+            "main": "./lib/actions/deleteGroup.js",
+            "title": "Delete a service group",
+            "description": "Delete a service group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceGroup": {
+            "main": "./lib/actions/serviceGroup.js",
+            "title": "Get a service group",
+            "description": "Get a service group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "patchGroup": {
+            "main": "./lib/actions/patchGroup.js",
+            "title": "Update a service group with a diff",
+            "description": "Update a service group with a diff",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/patchGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateGroup": {
+            "main": "./lib/actions/updateGroup.js",
+            "title": "Update a service group",
+            "description": "Update a service group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceGroupServices": {
+            "main": "./lib/actions/serviceGroupServices.js",
+            "title": "Get all services descriptor for a group",
+            "description": "Get all services descriptor for a group",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceGroupServices.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "fullImportFromFile": {
+            "main": "./lib/actions/fullImportFromFile.js",
+            "title": "Import the full state of Otoroshi as a file",
+            "description": "Import the full state of Otoroshi as a file",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/fullImportFromFile.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "globalLiveStats": {
+            "main": "./lib/actions/globalLiveStats.js",
+            "title": "Get global otoroshi stats",
+            "description": "Get global otoroshi stats",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/globalLiveStats.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceLiveStats": {
+            "main": "./lib/actions/serviceLiveStats.js",
+            "title": "Get live feed of otoroshi stats",
+            "description": "Get live feed of global otoroshi stats (global) or for a service {id}",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceLiveStats.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "fullExport": {
+            "main": "./lib/actions/fullExport.js",
+            "title": "Export the full state of Otoroshi",
+            "description": "Export the full state of Otoroshi",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/fullExport.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "fullImport": {
+            "main": "./lib/actions/fullImport.js",
+            "title": "Import the full state of Otoroshi",
+            "description": "Import the full state of Otoroshi",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/fullImport.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "allServices": {
+            "main": "./lib/actions/allServices.js",
+            "title": "Get all services",
+            "description": "Get all services",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/allServices.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createService": {
+            "main": "./lib/actions/createService.js",
+            "title": "Create a new service descriptor",
+            "description": "Create a new service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createService.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteService": {
+            "main": "./lib/actions/deleteService.js",
+            "title": "Delete a service descriptor",
+            "description": "Delete a service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteService.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "service": {
+            "main": "./lib/actions/service.js",
+            "title": "Get a service descriptor",
+            "description": "Get a service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/service.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "patchService": {
+            "main": "./lib/actions/patchService.js",
+            "title": "Update a service descriptor with a diff",
+            "description": "Update a service descriptor with a diff",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/patchService.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateService": {
+            "main": "./lib/actions/updateService.js",
+            "title": "Update a service descriptor",
+            "description": "Update a service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateService.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "apiKeys": {
+            "main": "./lib/actions/apiKeys.js",
+            "title": "Get all api keys for the group of a service",
+            "description": "Get all api keys for the group of a service",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/apiKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createApiKey": {
+            "main": "./lib/actions/createApiKey.js",
+            "title": "Create a new api key for a service",
+            "description": "Create a new api key for a service",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createApiKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteApiKey": {
+            "main": "./lib/actions/deleteApiKey.js",
+            "title": "Delete an api key",
+            "description": "Delete an api key for a specified service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteApiKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "apiKey": {
+            "main": "./lib/actions/apiKey.js",
+            "title": "Get an api key",
+            "description": "Get an api key for a specified service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/apiKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "patchApiKey": {
+            "main": "./lib/actions/patchApiKey.js",
+            "title": "Update an api key with a diff",
+            "description": "Update an api key for a specified service descriptor with a diff",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/patchApiKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateApiKey": {
+            "main": "./lib/actions/updateApiKey.js",
+            "title": "Update an api key",
+            "description": "Update an api key for a specified service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateApiKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "apiKeyGroup": {
+            "main": "./lib/actions/apiKeyGroup.js",
+            "title": "Get the group of an api key",
+            "description": "Get the group of an api key",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/apiKeyGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "resetApiKeyQuotas": {
+            "main": "./lib/actions/resetApiKeyQuotas.js",
+            "title": "Reset the quota state of an api key",
+            "description": "Reset the quota state of an api key",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/resetApiKeyQuotas.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "apiKeyQuotas": {
+            "main": "./lib/actions/apiKeyQuotas.js",
+            "title": "Get the quota state of an api key",
+            "description": "Get the quota state of an api key",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/apiKeyQuotas.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceDeleteTarget": {
+            "main": "./lib/actions/serviceDeleteTarget.js",
+            "title": "Delete a service descriptor target",
+            "description": "Delete a service descriptor target",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceDeleteTarget.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceTargets": {
+            "main": "./lib/actions/serviceTargets.js",
+            "title": "Get a service descriptor targets",
+            "description": "Get a service descriptor targets",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceTargets.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateServiceTargets": {
+            "main": "./lib/actions/updateServiceTargets.js",
+            "title": "Update a service descriptor targets",
+            "description": "Update a service descriptor targets",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateServiceTargets.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceAddTarget": {
+            "main": "./lib/actions/serviceAddTarget.js",
+            "title": "Add a target to a service descriptor",
+            "description": "Add a target to a service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceAddTarget.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteServiceTemplate": {
+            "main": "./lib/actions/deleteServiceTemplate.js",
+            "title": "Delete a service descriptor error template",
+            "description": "Delete a service descriptor error template",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteServiceTemplate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceTemplate": {
+            "main": "./lib/actions/serviceTemplate.js",
+            "title": "Get a service descriptor error template",
+            "description": "Get a service descriptor error template",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceTemplate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createServiceTemplate": {
+            "main": "./lib/actions/createServiceTemplate.js",
+            "title": "Create a service descriptor error template",
+            "description": "Update a service descriptor targets",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createServiceTemplate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateServiceTemplate": {
+            "main": "./lib/actions/updateServiceTemplate.js",
+            "title": "Update an error template to a service descriptor",
+            "description": "Update an error template to a service descriptor",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateServiceTemplate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "health": {
+            "main": "./lib/actions/health.js",
+            "title": "Return current Otoroshi health",
+            "description": "Import the full state of Otoroshi as a file",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/health.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "allLines": {
+            "main": "./lib/actions/allLines.js",
+            "title": "Get all environments",
+            "description": "Get all environments provided by the current Otoroshi instance",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/allLines.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "servicesForALine": {
+            "main": "./lib/actions/servicesForALine.js",
+            "title": "Get all services for an environment",
+            "description": "Get all services for an environment provided by the current Otoroshi instance",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/servicesForALine.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "initiateApiKey": {
+            "main": "./lib/actions/initiateApiKey.js",
+            "title": "Get a template of an Otoroshi Api Key",
+            "description": "Get a template of an Otoroshi Api Key. The generated entity is not persisted",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/initiateApiKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "initiateServiceGroup": {
+            "main": "./lib/actions/initiateServiceGroup.js",
+            "title": "Get a template of an Otoroshi service group",
+            "description": "Get a template of an Otoroshi service group. The generated entity is not persisted",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/initiateServiceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "initiateService": {
+            "main": "./lib/actions/initiateService.js",
+            "title": "Get a template of an Otoroshi service descriptor",
+            "description": "Get a template of an Otoroshi service descriptor. The generated entity is not persisted",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/initiateService.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
